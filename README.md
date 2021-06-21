@@ -1,3 +1,4 @@
-# JavaScript Everywhere: 자바스크립트는 모든 곳에 존재한다.
+## JavaScript Everywhere: 자바스크립트는 모든 곳에 존재한다.
 
-애덤 스콧
+Adam D. Scott.
+O'Reilly
