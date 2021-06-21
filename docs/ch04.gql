@@ -1,0 +1,6 @@
+type Pizza {
+  id: ID!
+  size: String!
+  slices: Int!
+  toppings: [String]
+}
