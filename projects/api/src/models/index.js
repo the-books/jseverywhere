@@ -1,9 +1,9 @@
 const Note = require('./note');
-// const User = require('./user');
+const User = require('./user');
 
 const models = {
   Note,
-  // User,
+  User,
 };
 
 module.exports = models;
