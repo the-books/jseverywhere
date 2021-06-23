@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-module.exports = gql`
+const typeDefs = gql`
   scalar DateTime
 
   type Note {
@@ -32,3 +32,5 @@ module.exports = gql`
     signIn(email: String, username: String, password: String!): String!
   }
 `;
+
+module.exports = typeDefs;

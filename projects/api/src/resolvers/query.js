@@ -1,4 +1,4 @@
-module.exports = {
+const Query = {
   notes: async (parents, args, { models }) => {
     return await models.Note.find();
   },
@@ -6,3 +6,5 @@ module.exports = {
     return await models.Note.findById(args.id);
   },
 };
+
+module.exports = Query;

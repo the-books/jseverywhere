@@ -22,7 +22,7 @@ const getUser = token => {
       throw new Error('Session invalid');
     }
   }
-}
+};
 
 const server = new ApolloServer({
   typeDefs,

@@ -2,8 +2,10 @@ const Query = require('./query');
 const Mutation = require('./mutation');
 const { GraphQLDateTime } = require('graphql-iso-date');
 
-module.exports = {
+const resolvers = {
   Query,
   Mutation,
   DateTime: GraphQLDateTime,
 };
+
+module.exports = resolvers;
