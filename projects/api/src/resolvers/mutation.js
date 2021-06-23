@@ -1,3 +1,4 @@
+const { AuthenticationError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -32,7 +33,7 @@ module.exports = {
     }
   },
 
-  signIn: async (parent, { email, username, password }, { models }) => {
+  signUp: async (parent, { email, username, password }, { models }) => {
 
     email = email.trim().toLowerCase();
     const hashed = await bcrypt.hash(password, 10);
@@ -50,5 +51,26 @@ module.exports = {
       console.log(err);
       throw new Error('Error creating account');
     }
+  },
+  signIn: async (parent, { email, username, password }, { models }) => {
+    if (email) {
+      email = email.trim().toLowerCase();
+    }
+
+    const user = await models.User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    if (!user) {
+      throw new AuthenticationError('Error signing in');
+    }
+
+    const valid = await bcrypt.compare(password, user.password);
+
+    if (!valid) {
+      throw new AuthenticationError('Error signing in');
+    }
+
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   },
 };
