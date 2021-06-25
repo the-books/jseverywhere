@@ -1,4 +1,5 @@
-const { AuthenticationError } = require('apollo-server-express');
+const mongoose = require('mongoose');
+const { AuthenticationError, ForbiddenError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -7,10 +8,14 @@ require('dotenv').config();
 const gravatar = require('../util/gravatar');
 
 const Mutation = {
-  newNote: async (parent, args, { models }) => {
+  newNote: async (parent, args, { models, user }) => {
+
+    if (!user) {
+      throw new AuthenticationError('You must be signed in to create a note.');
+    }
     return await models.Note.create({
       content: args.content,
-      author: 'Adam Scott',
+      author: mongoose.Types.ObjectId(user.id),
     });
   },
   updateNote: async (parent, { content, id }, { models }) => {
