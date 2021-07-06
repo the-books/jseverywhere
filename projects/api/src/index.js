@@ -1,7 +1,9 @@
+require('dotenv').config();
+
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const helmet = require('helmet');
 
 const db = require('./db');
 const models = require('./models');
@@ -12,6 +14,8 @@ const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 
 const app = express();
+app.use(helmet);
+
 db.connect(DB_HOST);
 
 const getUser = token => {
