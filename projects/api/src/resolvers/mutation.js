@@ -29,17 +29,14 @@ const Mutation = {
       throw new ForbiddenError("You don't have permissions to update the note");
     }
 
-    // return await models.Note.findOneAndUpdate({
-    //   _id: id
-    // }, {
-    //   $set: {
-    //     content,
-    //   },
-    // }, {
-    //   new: true,
-    // });
-    return await note.update({
-      $set: { content },
+    return await models.Note.findOneAndUpdate({
+      _id: id
+    }, {
+      $set: {
+        content,
+      },
+    }, {
+      new: true,
     });
   },
   deleteNote: async (parent, { id }, { models, user }) => {
