@@ -4,6 +4,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const helmet = require('helmet');
+const cors = requrire('cors');
 
 const db = require('./db');
 const models = require('./models');
@@ -14,7 +15,8 @@ const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 
 const app = express();
-app.use(helmet);
+app.use(helmet());
+app.use(cors());
 
 db.connect(DB_HOST);
 
