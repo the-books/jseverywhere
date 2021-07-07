@@ -4,7 +4,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const helmet = require('helmet');
-const cors = requrire('cors');
+const cors = require('cors');
 
 const db = require('./db');
 const models = require('./models');
