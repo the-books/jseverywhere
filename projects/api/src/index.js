@@ -15,8 +15,14 @@ const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 
 const app = express();
-app.use(helmet());
 app.use(cors());
+app.use(helmet.contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    'script-src': ["'self'", "cdn.jsdelivr.net", "'unsafe-inline'"],
+    'img-src': ["'self'", "cdn.jsdelivr.net"],
+  }
+}));
 
 db.connect(DB_HOST);
 
